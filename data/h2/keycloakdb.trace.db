@@ -1,0 +1,63 @@
+2023-03-15 23:22:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MIGRATION_MODEL" not found (this database is empty); SQL statement:
+SELECT ID, VERSION FROM MIGRATION_MODEL ORDER BY UPDATE_TIME DESC [42104-214]
+2023-03-15 23:22:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DATABASECHANGELOG" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-214]
+2023-03-15 23:22:58 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DATABASECHANGELOGLOCK" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK [42104-214]
+2023-03-15 23:22:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-214]
+2023-03-16 14:00:12 database: flush
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: Writing to sun.nio.ch.FileChannelImpl@2f83be06 failed; length 4096 at 8192 [2.1.214/2]" [50000-214]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:395)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at org.h2.mvstore.MVStore.write(MVStore.java:1271)
+	at org.h2.mvstore.MVStore.storeBuffer(MVStore.java:1750)
+	at org.h2.mvstore.MVStore.lambda$serializeAndStore$5(MVStore.java:1600)
+	at org.h2.mvstore.MVStore.submitOrRun(MVStore.java:1550)
+	at org.h2.mvstore.MVStore.serializeAndStore(MVStore.java:1600)
+	at org.h2.mvstore.MVStore.lambda$storeNow$4(MVStore.java:1518)
+	at org.h2.mvstore.MVStore.submitOrRun(MVStore.java:1550)
+	at org.h2.mvstore.MVStore.storeNow(MVStore.java:1517)
+	at org.h2.mvstore.MVStore.store(MVStore.java:1496)
+	at org.h2.mvstore.MVStore.commit(MVStore.java:1469)
+	at org.h2.mvstore.MVStore.commit(MVStore.java:1458)
+	at org.h2.mvstore.tx.TransactionStore.endTransaction(TransactionStore.java:633)
+	at org.h2.mvstore.tx.Transaction.commit(Transaction.java:511)
+	at org.h2.engine.SessionLocal.commit(SessionLocal.java:672)
+	at org.h2.engine.Database.<init>(Database.java:376)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.jdbcx.JdbcDataSource.getXAConnection(JdbcDataSource.java:322)
+	at io.agroal.pool.ConnectionFactory.createConnection(ConnectionFactory.java:232)
+	at io.agroal.pool.ConnectionPool$CreateConnectionTask.call(ConnectionPool.java:535)
+	at io.agroal.pool.ConnectionPool$CreateConnectionTask.call(ConnectionPool.java:516)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at io.agroal.pool.util.PriorityScheduledExecutor.beforeExecute(PriorityScheduledExecutor.java:75)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: Writing to sun.nio.ch.FileChannelImpl@2f83be06 failed; length 4096 at 8192 [2.1.214/2]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 34 more
+Caused by: org.h2.mvstore.MVStoreException: Writing to sun.nio.ch.FileChannelImpl@2f83be06 failed; length 4096 at 8192 [2.1.214/2]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.DataUtils.writeFully(DataUtils.java:493)
+	at org.h2.mvstore.FileStore.writeFully(FileStore.java:113)
+	at org.h2.mvstore.MVStore.write(MVStore.java:1269)
+	... 28 more
+Caused by: java.nio.channels.ClosedChannelException
+	at java.base/sun.nio.ch.FileChannelImpl.ensureOpen(FileChannelImpl.java:165)
+	at java.base/sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:994)
+	at org.h2.mvstore.DataUtils.writeFully(DataUtils.java:489)
+	... 30 more
